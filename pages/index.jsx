@@ -24,20 +24,26 @@ const Home = (props) => {
   const [apodCurrentData, setApodCurrentData] = useState()
 
   useEffect(() => {
-    setApodCurrentData([])
-    refresh()
+    if (apodCurrentData === undefined) {
+      setApodCurrentData([])
+      refresh()
+    }
   }, [])
 
  const refresh = (data) =>{
     getImageapod(current_data(),setApodCurrentData)
 	}
 
-	function handleSearch() {
-		this.refresh(this.state.data)
+	const search = (data) => {
+    var dia = String(data.getDate()).padStart(2, '0');
+    var mes = String(data.getMonth() + 1).padStart(2, '0');
+    var ano = data.getFullYear();
+    var dataAtual = ano + '-' + mes + '-' + dia;
+    setApodCurrentData()
+    getImageapod(dataAtual,setApodCurrentData)
 	}
 
- 
-
+  console.log(apodCurrentData);
   return (
     <div className={styles.container}>
       <Head>
@@ -50,11 +56,12 @@ const Home = (props) => {
         <About />
 
         <div className="row">
-          <FormForSearch onclick={handleSearch}/>
+          <FormForSearch search={search}/>
           {
-            apodCurrentData !== undefined && apodCurrentData.date === current_data() ?
+            apodCurrentData !== undefined && apodCurrentData.code !== 400 ?
               <ShowImage 
                 title={apodCurrentData.title}
+                date={apodCurrentData.date}
                 url={apodCurrentData.url} 
                 explanation={apodCurrentData.explanation} 
               /> : <NotFound/>
