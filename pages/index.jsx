@@ -7,7 +7,7 @@ import NotFound from './components/NotFound'
 import About from './components/About'
 import {getImageapod} from './api/operations'
 
-const Home = (props) => {
+const Home = () => {
 
   const current_data = () => {
     var data = new Date();
@@ -18,19 +18,15 @@ const Home = (props) => {
     return dataAtual
   }
 
-  const state = {
-    data: current_data()
-  }
   const [apodCurrentData, setApodCurrentData] = useState()
 
   useEffect(() => {
     if (apodCurrentData === undefined) {
-      setApodCurrentData([])
       refresh()
     }
   }, [])
 
- const refresh = (data) =>{
+ const refresh = () =>{
     getImageapod(current_data(),setApodCurrentData)
 	}
 
@@ -43,7 +39,6 @@ const Home = (props) => {
     getImageapod(dataAtual,setApodCurrentData)
 	}
 
-  console.log(apodCurrentData);
   return (
     <div className={styles.container}>
       <Head>
