@@ -14,3 +14,7 @@ yarn dev
 ```
 
 Abra no seu navegador [http://localhost:3000](http://localhost:3000)
+
+## Deploy
+
+Visite o link para visualizar o app rodando pela vercel [https://flau-nasa-apod-app.vercel.app/](https://flau-nasa-apod-app.vercel.app/)
