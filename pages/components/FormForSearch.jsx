@@ -1,9 +1,8 @@
 import React,{ useState } from "react";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { registerLocale, setDefaultLocale } from  "react-datepicker";
-import es from 'date-fns/locale/es';
-registerLocale('es', es)
+import ReactDatePicker,{registerLocale} from 'react-datepicker';
+import ptBR from 'date-fns/locale/pt-BR';
+registerLocale('ptBR', ptBR);
 
 const FormForSearch = ({search}) => {
   const [startDate, setStartDate] = useState(new Date());
@@ -18,8 +17,13 @@ const FormForSearch = ({search}) => {
       <form className="card p-2">
       <div className="row">
         <div className="col-md-12">
-          <DatePicker selected={startDate} onChange=
-            {(date) => setStartDate(date)} className="form-control"/>
+          <ReactDatePicker
+            selected={startDate}
+            locale={ptBR}
+            dateFormat="dd MMMM yyyy"
+            id="datepicker" 
+            onChange=
+              {(date) => setStartDate(date)} className="form-control" value={startDate}/>
             <div className="mb-3"></div>
             <a className="w-100 btn btn-success btn-lg" onClick={() => search(startDate)}>Buscar</a>
         </div>
